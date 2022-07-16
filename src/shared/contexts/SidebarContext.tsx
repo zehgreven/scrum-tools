@@ -1,6 +1,5 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 
-
 interface SidebarContextData {
   isSidebarOpen: boolean;
   sidebarOptions: SidebarOptions[];
@@ -15,7 +14,7 @@ export const useSidebarContext = () => {
 };
 
 interface SidebarProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 interface SidebarOptions {
@@ -32,12 +31,22 @@ export const SidebarProvider: React.FC<SidebarProps> = ({ children }) => {
     setIsSidebarOpen(oldSidebarState => !oldSidebarState);
   }, []);
 
-  const handleSetSidebarOptions = useCallback((newSidebarOptions: SidebarOptions[]) => {
-    setSidebarOptions(newSidebarOptions);
-  }, []);
+  const handleSetSidebarOptions = useCallback(
+    (newSidebarOptions: SidebarOptions[]) => {
+      setSidebarOptions(newSidebarOptions);
+    },
+    [],
+  );
 
   return (
-    <SidebarContext.Provider value={{ isSidebarOpen, sidebarOptions, toggleSidebar, setSidebarOptions: handleSetSidebarOptions }}>
+    <SidebarContext.Provider
+      value={{
+        isSidebarOpen,
+        sidebarOptions,
+        toggleSidebar,
+        setSidebarOptions: handleSetSidebarOptions,
+      }}
+    >
       {children}
     </SidebarContext.Provider>
   );

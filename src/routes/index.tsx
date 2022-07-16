@@ -24,9 +24,22 @@ export const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/home" element={<BasePageLayout><h1>HOME</h1></BasePageLayout>} />
-      <Route path="/planning-poker" element={<PlanningPoker />} />
-      <Route path="*" element={<Navigate to="/not-found" />} />
+      <Route
+        path='/home'
+        element={
+          <BasePageLayout>
+            <h1>HOME</h1>
+          </BasePageLayout>
+        }
+      />
+      <Route
+        path='/planning-poker'
+        element={<PlanningPoker />}
+      />
+      <Route
+        path='*'
+        element={<Navigate to='/not-found' />}
+      />
     </Routes>
   );
 };
