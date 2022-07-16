@@ -1,11 +1,11 @@
-import { Button } from '@mui/material';
 import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { useAppThemeContext, useDrawerContext } from '../shared/contexts';
+import { PlanningPoker } from '../pages/planning-poker/PlanningPoker';
+import { useSidebarContext } from '../shared/contexts';
+import { BasePageLayout } from '../shared/layouts';
 
 export const AppRoutes = () => {
-  const { toggleTheme } = useAppThemeContext();
-  const { toggleDrowerOpen, setDrawerOptions } = useDrawerContext();
+  const { setSidebarOptions: setDrawerOptions } = useSidebarContext();
 
   useEffect(() => {
     setDrawerOptions([
@@ -24,18 +24,8 @@ export const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/home" element={
-        <>
-          <Button variant='contained' color='primary' onClick={toggleDrowerOpen}>Toggle Sidebar</Button>
-          <Button variant='contained' color='primary' onClick={toggleTheme}>Toggle Theme</Button>
-        </>
-      } />
-      <Route path="/planning-poker" element={
-        <>
-          <Button variant='contained' color='primary' onClick={toggleDrowerOpen}>Toggle Sidebar</Button>
-          <Button variant='contained' color='primary' onClick={toggleTheme}>Toggle Theme</Button>
-        </>
-      } />
+      <Route path="/home" element={<BasePageLayout><h1>HOME</h1></BasePageLayout>} />
+      <Route path="/planning-poker" element={<PlanningPoker />} />
       <Route path="*" element={<Navigate to="/not-found" />} />
     </Routes>
   );

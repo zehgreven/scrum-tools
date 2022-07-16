@@ -1,7 +1,7 @@
 import { Drawer, Icon, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { useMatch, useNavigate, useResolvedPath } from 'react-router-dom';
-import { useDrawerContext } from '../../contexts';
+import { useSidebarContext } from '../../contexts';
 
 interface SidebarProps {
   children: React.ReactNode
@@ -42,20 +42,20 @@ const ListItemLink : React.FC<ListItemLinkProps> = ({ label, icon, to, onClick }
 export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   const theme = useTheme();
   const smDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const { isDrawerOpen, toggleDrowerOpen, drawerOptions } = useDrawerContext();
+  const { isSidebarOpen, toggleSidebar, sidebarOptions } = useSidebarContext();
 
   return (
     <>
-      <Drawer open={isDrawerOpen} variant={smDown ? 'temporary' : 'permanent'} onClose={toggleDrowerOpen}>
+      <Drawer open={isSidebarOpen} variant={smDown ? 'temporary' : 'permanent'} onClose={toggleSidebar}>
         <Box width={theme.spacing(28)}>
           <List component="nav">
-            {drawerOptions.map((drawerOption) => (
+            {sidebarOptions.map((drawerOption) => (
               <ListItemLink
                 key={drawerOption.path}
                 label={drawerOption.label}
                 icon={drawerOption.icon}
                 to={drawerOption.path}
-                onClick={smDown ? toggleDrowerOpen : undefined}
+                onClick={smDown ? toggleSidebar : undefined}
               />
             ))}
           </List>
