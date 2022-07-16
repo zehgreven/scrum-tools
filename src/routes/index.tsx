@@ -16,7 +16,7 @@ export const AppRoutes = () => {
       },
       {
         label: 'Planning Poker',
-        icon: 'star',
+        icon: 'handshake',
         path: '/planning-poker',
       },
     ]);
