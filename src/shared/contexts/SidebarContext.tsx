@@ -37,7 +37,7 @@ export const SidebarProvider: React.FC<SidebarProps> = ({ children }) => {
   }, []);
 
   return (
-    <SidebarContext.Provider value={{ isSidebarOpen: isSidebarOpen, sidebarOptions: sidebarOptions, toggleSidebar: toggleSidebar, setSidebarOptions: handleSetSidebarOptions }}>
+    <SidebarContext.Provider value={{ isSidebarOpen, sidebarOptions, toggleSidebar, setSidebarOptions: handleSetSidebarOptions }}>
       {children}
     </SidebarContext.Provider>
   );
