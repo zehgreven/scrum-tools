@@ -1,17 +1,19 @@
-import { Drawer, Icon, List, ListItemButton, ListItemIcon, ListItemText, useTheme } from '@mui/material';
+import { Drawer, Icon, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
+import { useDrawerContext } from '../../contexts';
 
 interface SidebarProps {
   children: React.ReactNode
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
-
   const theme = useTheme();
+  const smDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const { isDrawerOpen, toggleDrowerOpen } = useDrawerContext();
 
   return (
     <>
-      <Drawer variant='permanent'>
+      <Drawer open={isDrawerOpen} variant={smDown ? 'temporary' : 'permanent'} onClose={toggleDrowerOpen}>
         <Box width={theme.spacing(28)}>
           <List component="nav">
             <ListItemButton>
@@ -23,7 +25,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }) => {
           </List>
         </Box>
       </Drawer>
-      <Box height="100vh" marginLeft={theme.spacing(28)}>
+      <Box height="100vh" marginLeft={smDown ? 0 : theme.spacing(28)}>
         {children}
       </Box>
     </>
