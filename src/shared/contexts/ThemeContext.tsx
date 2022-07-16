@@ -8,6 +8,7 @@ enum ThemeName {
 
 interface ThemeContextData {
   themeName: ThemeName;
+  isDark: boolean;
   toggleTheme: () => void;
 }
 
@@ -24,6 +25,8 @@ interface AppThemeProviderProps {
 export const AppThemeProvider: React.FC<AppThemeProviderProps> = ({ children }) => {
   const [themeName, setThemeName] = useState<ThemeName>(ThemeName.DARK);
 
+  const isDark = themeName === ThemeName.DARK;
+
   const toggleTheme = useCallback(() => {
     setThemeName(oldThemeName => oldThemeName === ThemeName.LIGHT ? ThemeName.DARK : ThemeName.LIGHT);
   }, []);
@@ -34,7 +37,7 @@ export const AppThemeProvider: React.FC<AppThemeProviderProps> = ({ children }) 
   }, [themeName]);
 
   return (
-    <ThemeContext.Provider value={{ themeName, toggleTheme }}>
+    <ThemeContext.Provider value={{ themeName, isDark, toggleTheme }}>
       <ThemeProvider theme={theme}>
         <Box width="100vw" height="100vh" bgcolor={theme.palette.background.default}>
           {children}
